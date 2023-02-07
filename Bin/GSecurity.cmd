@@ -12,9 +12,7 @@ C:\Windows\System32\WindowsPowerShell\v1.0\PowerShell -NonInteractive -WindowSty
 mshta.exe vbscript:Execute("MsgBox ""Installing GSecurity"", vbOkOnly, ""GSecurity""")(window.close) 
 
 :: Registry
-Reg import BFE.reg
-Reg import Firewall.reg
-Reg import GSecurity_Tiny.reg
+Reg import GSecurity.reg
 
 :: Antilogger
 copy /y keycrypt64.sys C:\Windows\system32\drivers\

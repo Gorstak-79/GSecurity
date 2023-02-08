@@ -28,6 +28,20 @@ schtasks /create /xml "Ram Cleaner.xml" /tn "Ram Cleaner" /ru ""
 :: Security policy
 lgpo /s GSecurity.inf
 
+:: Perms
+c:
+cd\
+icacls c: /remove "Authenticated Users"
+takeown /f "%SystemDrive%\Users\Public\Desktop" /r /d y
+icacls "%SystemDrive%\Users\Public\Desktop" /inheritance:r
+icacls "%SystemDrive%\Users\Public\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
+takeown /f "%USERPROFILE%\Desktop" /r /d y
+icacls "%USERPROFILE%\Desktop" /inheritance:r
+icacls "%USERPROFILE%\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
+
+:: Active folder
+pushd %~dp0
+
 :: Disable remote access
 @powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Disable-PSRemoting -Force"
 
